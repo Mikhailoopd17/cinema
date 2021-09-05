@@ -1,0 +1,49 @@
+Создаем кинотеатр
+curl --location --request POST 'http://localhost:8080/api/cinema' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "name": "I-MAX"
+}'
+
+Генерируем места (cinemaId - с шага 1)
+curl --location --request POST 'http://localhost:8080/api/place/generate' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "rows": 3,
+  "numbers": 4,
+  "cinemaId": 1
+}'
+
+Создаем сеансы
+curl --location --request POST 'http://localhost:8080/api/sessions' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Passengers",
+    "cinemaId": 1
+}'
+
+curl --location --request POST 'http://localhost:8080/api/sessions' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Avengers",
+    "cinemaId": 1
+}'
+
+Проверяем сгенерированные места
+curl --location --request GET 'http://localhost:8080/api/sessions/1/places'
+
+Бронируем места
+curl --location --request POST 'http://localhost:8080/api/tickets/reserve' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "placeIds": [
+    1, 2, 3 ,4, 5
+  ],
+  "sessionId": 1,
+  "cinemaId": 2
+}'
+
+Снова проверяем места
+curl --location --request GET 'http://localhost:8080/api/sessions/1/places'
+
+

@@ -69,7 +69,6 @@ class CinemaDao(override val dataSource: DataSource) : DAO<Cinema> {
                     Cinema(
                         set.getInt("id"),
                         set.getString("name"),
-                        set.getInt("size"),
                         set.getBoolean("is_deleted")
                     )
                 )

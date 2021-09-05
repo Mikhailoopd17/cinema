@@ -33,7 +33,6 @@ data class Session(var id: Int,
  */
 data class Cinema(var id: Int,
                   var name: String,
-                  var size: Int = 0,
                   @JsonIgnore var isDeleted: Boolean = false) {
     @JsonIgnore var placeIds: List<Int> = ArrayList()
 }

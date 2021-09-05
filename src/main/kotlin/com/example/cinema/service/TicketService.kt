@@ -1,6 +1,5 @@
 package com.example.cinema.service
 
-import com.example.cinema.App.cache
 import com.example.cinema.dao.PlaceDao
 import com.example.cinema.dao.TicketDao
 import com.example.cinema.entity.ReservedParams
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service
 
 @Service
 class TicketService(override val dao: TicketDao, val placeDao: PlaceDao) : IService<Ticket> {
-    private val cacheName = "tickets"
     /**
      *  одновременно можем купить n-билетов на конкретный сеанс (исключаем одновременную покупку на разные сеансы)
      */

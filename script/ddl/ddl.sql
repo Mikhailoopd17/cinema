@@ -1,4 +1,9 @@
--- TABLES --
+-- DB
+CREATE DATABASE cinema;
+CREATE USER cinema WITH PASSWORD 'cinema';
+GRANT ALL PRIVILEGES ON DATABASE cinema TO cinema;
+
+-- TABLES
 
 CREATE TABLE public.places
 (
