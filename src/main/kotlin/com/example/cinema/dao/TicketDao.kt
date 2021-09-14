@@ -53,7 +53,7 @@ class TicketDao(override val dataSource: DataSource) : DAO<Ticket> {
                         set.getString("customer"),
                         set.getInt("place_id"),
                         set.getInt("session_id"),
-                        LocalDateTime.parse(set.getString("sale_date"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
+                        LocalDateTime.parse(set.getString("sale_date"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS")),
                         set.getBoolean("is_deleted")
                         ))
             }
