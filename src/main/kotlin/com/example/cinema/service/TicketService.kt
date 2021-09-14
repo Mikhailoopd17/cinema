@@ -14,7 +14,10 @@ class TicketService(override val dao: TicketDao, val placeDao: PlaceDao) : IServ
      *  одновременно можем купить n-билетов на конкретный сеанс (исключаем одновременную покупку на разные сеансы)
      */
     @Synchronized
-    fun reservationTickets(params: ReservedParams): Boolean {
+    //Взамен синхронизации  метода (например при нескольких сервисах)  для временного хранения и блокровки ресурсов
+    // можно реализовать: 1. кэш типа redis/hazelcast и блокировать ресурсы на стороне backend,
+    // 2. Через дополнительные таблицы в БД и настройке изоляции транзакций
+    fun reservationTickets(params: ReservedParams): ArrayList<Int> {
         if (!placeDao.checkExistAndFreePlaces(params)) {
             throw RestException("Selected places already reserved or not found")
         }
