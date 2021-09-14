@@ -19,7 +19,6 @@ class TicketService(override val dao: TicketDao, val placeDao: PlaceDao) : IServ
             throw RestException("Selected places already reserved or not found")
         }
 
-        dao.createBatch(Utils.buildTicketValues(params))
-        return true
+        return dao.createBatch(Utils.buildTicketValues(params))
     }
 }

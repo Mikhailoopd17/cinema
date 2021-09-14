@@ -22,7 +22,9 @@ class ExceptionHandlingAdvice() {
         )
     }
 
-    @ExceptionHandler
+
+    // это не очень хорошая практика - сделал только для отладки
+    /*@ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     fun handleSQLException(e: PSQLException): ErrorMessage {
@@ -31,7 +33,7 @@ class ExceptionHandlingAdvice() {
             HttpStatus.BAD_REQUEST.value(),
             "SQL error! ${e.message}"
         )
-    }
+    }*/
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

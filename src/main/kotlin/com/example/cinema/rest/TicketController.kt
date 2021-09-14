@@ -19,11 +19,12 @@ class TicketController(val service: TicketService) {
     }
 
     @PostMapping("/reserve")
-    fun reservation(@RequestBody params: ReservedParams): HttpStatus {
+    fun reservation(@RequestBody params: ReservedParams): List<Ticket> {
         if (params.placeIds.isEmpty() || params.cinemaId < 1 || params.sessionId < 1) {
             throw RestException("Required fields are missing. $params")
         }
-        service.reservationTickets(params)
-        return HttpStatus.OK
+
+        val ids = service.reservationTickets(params)
+        return service.getList(RequestParams(ids))
     }
 }

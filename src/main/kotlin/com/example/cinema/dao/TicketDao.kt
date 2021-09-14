@@ -32,10 +32,18 @@ class TicketDao(override val dataSource: DataSource) : DAO<Ticket> {
         }
     }
 
-    fun createBatch(values: String): Boolean {
+    fun createBatch(values: String): ArrayList<Int> {
         val query = createSqlTemplate.append(" VALUES $values")
+        val list = arrayListOf<Int>()
         getConnection().use{
-            return it.createStatement().execute(query.toString())
+            val statement = it.prepareStatement(query.toString(), Statement.RETURN_GENERATED_KEYS)
+            statement.execute()
+            statement.generatedKeys.use { st ->
+                while (st.next()) {
+                    list.add(st.getInt(1))
+                }
+            }
+            return list
         }
     }
 
